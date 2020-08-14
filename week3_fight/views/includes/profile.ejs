@@ -78,10 +78,12 @@
           >
             &times;
           </button>
-          <form method="POST" action="/edit-profile">
+
+          <form method="POST" action="/edit-profile" enctype="multipart/form-data"  accept=".png, .jpg">
             <div class="container text-left">
               <div class="row form-gorup mt-5">
                 <label for="thumbnail">프로필 수정</label>
+                <input type="file" name='image'>
                 <input id="thumbnail" name = "thumbnail" class="form-control" />
                 <small class="form-text text-muted"
                   >수정할 프로필 사진 URL을 입력하세요.</small
