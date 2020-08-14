@@ -27,6 +27,10 @@ const User = sequelize.define(
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    thumbnailURL: {
+      type: Sequelize.STRING, // 이미지 URL
+      allowNull: true,
+    },
     resetToken: Sequelize.STRING,
     resetTokenExpiration: Sequelize.DATE,
   },

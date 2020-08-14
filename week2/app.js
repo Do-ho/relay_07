@@ -1,20 +1,22 @@
 const path = require("path");
 
 const express = require("express");
-const sequelize = require("./util/database");
+const {sequelize,DB_INFO} = require("./util/database");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 
 const app = express();
 
-const store = new MySQLStore({
-  host: "host-ip",
-  port: "port-number",
-  user: "user-id",
-  password: "password",
-  database: "dbName",
-  clearExpired: true,
-});
+// const DB_INFO = {
+//   host: "localhost",
+//   port: 3306,
+//   user: "relay7",
+//   password: "q1w2e3r4t5",
+//   database: "relay7",
+//   clearExpired: true,
+// }
+
+const store = new MySQLStore(DB_INFO);
 
 // model
 const User = require("./models/user");
@@ -56,6 +58,7 @@ app.use(async (req, res, next) => {
 // router
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
+const userRoutes = require("./routes/user");
 
 // db relation
 // user:school = M:1
@@ -68,6 +71,7 @@ User.hasMany(Post);
 // routing
 app.use(authRoutes);
 app.use(postRoutes);
+app.use(userRoutes);
 
 // error 404 controller
 const errorController = require("./controllers/error");
